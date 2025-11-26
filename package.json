@@ -1,0 +1,37 @@
+{
+  "name": "minimalmusic",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --exec electron .",
+    "build": "electron-builder"
+  },
+  "build": {
+    "appId": "com.saccharin.minimalmusic",
+    "win": {
+      "icon": "./icon.jpg",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true
+    }
+  },
+  "keywords": [],
+  "author": "Saccharin",
+  "license": "ISC",
+  "description": "A mininal music app.",
+  "devDependencies": {
+    "electron": "^39.2.3",
+    "electron-builder": "^26.0.12"
+  }
+}
