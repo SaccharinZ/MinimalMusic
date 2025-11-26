@@ -6,13 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src https://*; child-src 'none';" />
     <title>Minimal Music</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="player.css">
 </head>
 
 <body>
-    <h1>Ciallo, World ~</h1>
+    <h1>Ciallo, Minimal Music ~</h1>
     <p id="info"></p>
-    <button id="btn">msg</button>
+
+    <div class="custom-player">
+        <div class="audio-info">
+            <p id="audio-title">当前播放: Test Music</p>
+        </div>
+
+        <div class="controls">
+            <button class="play-btn" id="playBtn">▶</button>
+
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+
+            <div class="time-display" id="timeDisplay">00:00 / 00:00</div>
+
+            <div class="volume-container">
+                <span class="volume-icon">🔊</span>
+                <div class="volume-slider" id="volumeSlider">
+                    <div class="volume-level" id="volumeLevel"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <audio id="audioPlayer"></audio>
+
+
     <script src="./renderer.js"></script>
+    <script src="./player.js"></script>
 </body>
 
 </html>
