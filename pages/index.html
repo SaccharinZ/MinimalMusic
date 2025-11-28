@@ -4,15 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src https://*; child-src 'none';" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src https://*; child-src 'none'; 
+        style-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com;
+        font-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com;" />
     <title>Minimal Music</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="player.css">
+    <link rel="stylesheet" href="playlist.css">
 </head>
 
 <body>
     <h1>Ciallo, Minimal Music ~</h1>
     <p id="info"></p>
+
+    <div class="play-list-box">
+        <ul class="play-list"></ul>
+    </div>
+
 
     <div class="custom-player">
         <div class="audio-info">
@@ -20,7 +29,18 @@
         </div>
 
         <div class="controls">
-            <button class="play-btn" id="playBtn">▶</button>
+
+            <button id="prevBtn" class="prev-btn" title="上一首"><i class="fas fa-step-backward"></i></button>
+            <button class="play-btn" id="playBtn" title="播放/暂停">▶</button>
+            <button id="nextBtn" class="next-btn" title="下一首"><i class="fas fa-step-forward"></i></button>
+
+            <div class="mod-btn-box">
+                <i class="fas fa-shuffle play-mod-btn" data-mode="shuffle" title="随机播放"></i>
+                <i class="fas fa-retweet play-mod-btn" data-mode="retweet" style="display: none;" title="列表循环"></i>
+                <i class="fas fa-repeat play-mod-btn" data-mode="repeat" style="display: none;" title="单曲循环"></i>
+            </div>
+
+
 
             <div class="progress-container" id="progressContainer">
                 <div class="progress-bar" id="progressBar"></div>

@@ -1,5 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
+const fs = require('fs')
+const { updatePlayList } = require('./backend/fileList.js')
 
 const createWindow = () => {
     const win = new BrowserWindow({
@@ -14,13 +16,22 @@ const createWindow = () => {
     win.loadFile('./pages/index.html')
 }
 
-const recMsg = (event, data) => {
-    console.log('msg:', data)
-}
+
 
 app.whenReady().then(() => {
-    ipcMain.handle('ping', () => 'pong')
-    ipcMain.on('msg', recMsg)
+    ipcMain.handle('getConfig', () => {
+        if (!fs.existsSync('./config.json')) {
+            fs.writeFileSync('./config.json', JSON.stringify({
+                dirs: ['D:/音乐1'],
+                playMod: 0
+            }))
+        }
+        const config = JSON.parse(fs.readFileSync('./config.json').toString())
+        return config
+    })
+    ipcMain.handle('updatePlayList', updatePlayList)
+
+
     createWindow()
 
     app.on('activate', () => {

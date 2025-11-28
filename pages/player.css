@@ -1,7 +1,4 @@
 
-*{
-    box-sizing: border-box;
-}
 
 
 /* 播放器容器 */
@@ -39,6 +36,23 @@
     gap: 15px;
 }
 
+.prev-btn,
+.next-btn{
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    color: rgb(19, 181, 240);
+    line-height: 40px;
+    font-size: 30px;
+    cursor: pointer;
+    border: none;
+    transition: color 0.5s;
+}
+.prev-btn:hover,
+.next-btn:hover{
+    color: #498bf7;
+}
+
 /* 播放/暂停按钮 */
 .play-btn {
     width: 40px;
@@ -59,8 +73,20 @@
 
 
 
-#play-btn:hover {
-    background: #1ca6f0;
+.play-btn:hover {
+    background: #498bf7;
+}
+
+.mod-btn-box{
+    width: 40px;
+}
+
+.fa-shuffle,
+.fa-retweet,
+.fa-repeat{
+    margin: 0 10px;
+    font-size: 20px;
+    cursor: pointer;
 }
 
 /* 进度条容器 */
