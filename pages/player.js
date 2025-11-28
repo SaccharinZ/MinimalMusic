@@ -8,7 +8,8 @@ const timeDisplay = document.getElementById('timeDisplay')
 const volumeSlider = document.getElementById('volumeSlider')
 const volumeLevel = document.getElementById('volumeLevel')
 const audioTitle = document.getElementById('audio-title')
-
+const prevBtn = document.getElementById('prevBtn')
+const nextBtn = document.getElementById('nextBtn')
 
 
 let config
@@ -19,22 +20,20 @@ let isDraggingVolume = false
 const init = async () => {
     config = await myAPI.getConfig()
     config.playList = await myAPI.updatePlayList(config.dirs[0])
-    for (let songIdx in config.playList) {
+    for (let songIdx = 0; songIdx < config.playList.length; songIdx++) {
         let li = document.createElement('li')
         li.innerHTML = config.playList[songIdx]
         li.classList.add('play-list-item')
         li.addEventListener('click', function () {
+
             changeSong(songIdx)
-            audioPlayer.play().catch((err) => {
-                console.error('播放失败:', err)
-            })
-            playBtn.textContent = '⏸'
-            playBtn.classList.add('playing')
+
         })
         playList.appendChild(li)
     }
-    changeSong(0)
+    changeSong(0, false)
     // 为每个按钮绑定点击事件
+    config.playMod %= modBtns.length
     modBtns.forEach((btn) => {
         btn.style.display = 'none'
         btn.addEventListener('click', () => {
@@ -44,7 +43,7 @@ const init = async () => {
         })
     })
     modBtns[config.playMod].style.display = 'inline-block'
-    console.log(config.playList)
+    // console.log(config.playList)
 }
 init()
 
@@ -89,6 +88,29 @@ audioPlayer.addEventListener('timeupdate', () => {
     }
     timeDisplay.textContent = `${formatTime(audioPlayer.currentTime)} / ${formatTime(audioPlayer.duration)
         }`
+})
+
+// 播放下一首
+const playNextSong = () => {
+    if (config.playMod === 0) {
+        //随机播放
+        let nextSong = Math.floor(Math.random() * config.playList.length)
+        changeSong(nextSong)
+    } else if (config.playMod === 1) {
+        //列表循环
+        changeSong((config.curSongIdx + 1) % config.playList.length)
+    } else {
+        //单曲循环
+        changeSong(config.curSongIdx)
+    }
+}
+audioPlayer.addEventListener('ended', () => {
+
+    playNextSong()
+})
+
+nextBtn.addEventListener('click', () => {
+    playNextSong()
 })
 
 // 点击进度条跳转播放位置
@@ -143,8 +165,19 @@ function updateVolume(e) {
     volumeLevel.style.width = `${volume * 100}%`
 }
 
-function changeSong(songIndex) {
-    config.curSong = config.playList[songIndex]
-    audioTitle.innerText = `当前播放: ${config.curSong}`
-    audioPlayer.src = config.curSong
+function changeSong(songIndex, playnow = true) {
+    console.log(config)
+    config.curSongIdx = songIndex
+    console.log('change to', config.curSongIdx)
+
+    audioTitle.innerText = `当前播放: ${config.playList[config.curSongIdx]}`
+    audioPlayer.src = config.playList[config.curSongIdx]
+    if (playnow) {
+        audioPlayer.play().catch((err) => {
+            console.error('播放失败:', err)
+        })
+        playBtn.textContent = '⏸'
+        playBtn.classList.add('playing')
+    }
+
 }
