@@ -5,6 +5,7 @@ contextBridge.exposeInMainWorld('myAPI', {
     chrome: () => process.versions.chrome,
     electron: () => process.versions.electron,
     updatePlayList: (dir) => ipcRenderer.invoke('updatePlayList', dir),
-    getConfig: () => ipcRenderer.invoke('getConfig')
+    getConfig: () => ipcRenderer.invoke('getConfig'),
+    saveConfig: (index, value) => ipcRenderer.invoke('saveConfig', index, value)
 
 })

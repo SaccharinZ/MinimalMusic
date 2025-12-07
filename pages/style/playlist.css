@@ -2,6 +2,7 @@
 
 .play-list-box {
     width: 100%;
+    
     /* margin: 0 20px; */
     /* overflow: auto; */
 }
@@ -21,5 +22,5 @@
 }
 
 .play-list-item:hover{
-    background-color: #024c95;
+    background-color: color-mix(in srgb, var(--background-color) 90%, rgb(148, 148, 148) 10%);
 }

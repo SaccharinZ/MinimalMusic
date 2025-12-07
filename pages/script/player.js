@@ -11,14 +11,30 @@ const audioTitle = document.getElementById('audio-title')
 const prevBtn = document.getElementById('prevBtn')
 const nextBtn = document.getElementById('nextBtn')
 
+document.getElementById('settingBtn').addEventListener('click', function () {
+    routePage('settingPage')
+})
 
-let config
+
+
 audioPlayer.volume = 0.7
 volumeLevel.style.width = '70%'
 let isDraggingVolume = false
 
 const init = async () => {
     config = await myAPI.getConfig()
+    if (config.lightnessTheme == 'dark') {
+        root.style.setProperty('--lightness', '0%')
+    } else {
+        root.style.setProperty('--lightness', '100%')
+    }
+    await playListInit()
+}
+init()
+
+async function playListInit() {
+    routePage('playListPage')
+
     config.playList = await myAPI.updatePlayList(config.dirs[0])
     for (let songIdx = 0; songIdx < config.playList.length; songIdx++) {
         let li = document.createElement('li')
@@ -45,7 +61,7 @@ const init = async () => {
     modBtns[config.playMod].style.display = 'inline-block'
     // console.log(config.playList)
 }
-init()
+
 
 
 
@@ -170,7 +186,7 @@ function changeSong(songIndex, playnow = true) {
     config.curSongIdx = songIndex
     console.log('change to', config.curSongIdx)
 
-    audioTitle.innerText = `当前播放: ${config.playList[config.curSongIdx]}`
+    audioTitle.innerText = `Playing: ${config.playList[config.curSongIdx]}`
     audioPlayer.src = config.playList[config.curSongIdx]
     if (playnow) {
         audioPlayer.play().catch((err) => {

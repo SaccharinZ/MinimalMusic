@@ -1,7 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
 const fs = require('fs')
-const { updatePlayList } = require('./backend/fileList.js')
+const { updatePlayList, getConfig, saveConfig } = require('./backend/handleAPI.js')
 
 const createWindow = () => {
     const win = new BrowserWindow({
@@ -19,17 +19,17 @@ const createWindow = () => {
 
 
 app.whenReady().then(() => {
-    ipcMain.handle('getConfig', () => {
-        if (!fs.existsSync('./config.json')) {
-            fs.writeFileSync('./config.json', JSON.stringify({
-                dirs: ['D:/音乐1'],
-                playMod: 0
-            }))
-        }
-        const config = JSON.parse(fs.readFileSync('./config.json').toString())
-        return config
-    })
+    if (!fs.existsSync('./userConfig.json')) {
+        fs.writeFileSync('./userConfig.json', JSON.stringify({
+            dirs: ['D:/音乐1'],
+            playMod: 0,
+            colorTheme: 0,
+            lightnessTheme: 'dark'
+        }))
+    }
+    ipcMain.handle('getConfig', getConfig)
     ipcMain.handle('updatePlayList', updatePlayList)
+    ipcMain.handle('saveConfig', saveConfig)
 
 
     createWindow()
@@ -44,3 +44,4 @@ app.on('window-all-closed', () => {
         app.quit()
     }
 })
+

@@ -1,0 +1,52 @@
+
+:root{
+    --theme-color:rgb(75, 208, 253);
+
+    --lightness: 0%;/* 0% 黑色, 100% 白色 */
+    --lightness-color:hsl(0, 0%, var(--lightness));
+    --text-color: hsl(0, 0%, calc(100% - var(--lightness)));
+
+    --background-color:color-mix(in srgb, var(--theme-color)  35%,var(--lightness-color)  65%);
+
+    
+    
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+body{
+    height: 100%;
+    color: var(--text-color);
+    background: linear-gradient(
+        to right,
+        color-mix(in srgb,var(--background-color)  70%,var(--lightness-color)  30%),
+        var(--background-color)
+    );
+}
+
+.content{
+    margin: 0 0 200px;
+}
+
+body>h1{
+    height: 40px;
+    margin: 10px 10px;
+    line-height: 40px;
+    font-size: 40px;
+}
+
+#info{
+    height: 20px;
+    margin: 10px 10px;
+    line-height: 20px;
+    font-size: 20px;
+}
+
+.hide-page{
+    display: none;
+}

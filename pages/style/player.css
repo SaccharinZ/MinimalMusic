@@ -10,10 +10,10 @@
     left: 3%;
     right: 3%;
     z-index: 1000;
-    background: linear-gradient(135deg, #2c3e50, #34495e);
+    background: color-mix(in srgb,var(--background-color) 50%,var(--lightness-color) 50%);
     border-radius: 16px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-    color: white;
+    /* color: white; */
     font-family: Arial, sans-serif;
 }
 
@@ -41,7 +41,7 @@
     width: 40px;
     height: 40px;
     background-color: transparent;
-    color: rgb(19, 181, 240);
+    color: var(--theme-color);
     line-height: 40px;
     font-size: 30px;
     cursor: pointer;
@@ -50,7 +50,7 @@
 }
 .prev-btn:hover,
 .next-btn:hover{
-    color: #498bf7;
+    color: color-mix(in srgb,var(--theme-color) 90%,black 10%);
 }
 
 /* 播放/暂停按钮 */
@@ -58,9 +58,9 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: #43bdf5;
+    background: var(--theme-color);;
     border: none;
-    color: white;
+    color: var(--text-color);
     font-size: 16px;
     cursor: pointer;
     line-height: 40px;
@@ -74,16 +74,23 @@
 
 
 .play-btn:hover {
-    background: #498bf7;
+    background: color-mix(in srgb, var(--theme-color) 90%, black 10%);;
 }
 
 .mod-btn-box{
     width: 40px;
 }
 
+.setting-btn{
+    background: none;
+    border: none;
+    color: var(--text-color);
+}
+
 .fa-shuffle,
 .fa-retweet,
-.fa-repeat{
+.fa-repeat,
+.fa-gear{
     margin: 0 10px;
     font-size: 20px;
     cursor: pointer;
@@ -106,7 +113,7 @@
 /* 已播放进度 */
 .progress-bar {
     height: 100%;
-    background: #e74c3c;
+    background: var(--theme-color);
     width: 0%;
     transition: width 0.1s;
 }
@@ -135,18 +142,18 @@
     width: 80px;
     height: 6px;
     margin-left: 2px;
-    background: #8298ae;
+    background: #dae0e6;
     border-radius: 3px;
     cursor: pointer;
 }
 
 .volume-slider:hover{
     height: 10px;
-    border: #43bdf5 solid 1px;
+    /* border: #43bdf5 solid 1px; */
 }
 
 .volume-level {
     height: 100%;
-    background: #437df9;
+    background: var(--theme-color);
     width: 70%;
 }
