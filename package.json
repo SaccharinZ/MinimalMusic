@@ -10,7 +10,7 @@
   "build": {
     "appId": "com.saccharin.minimalmusic",
     "win": {
-      "icon": "./icon.jpg",
+      "icon": "./icon.png",
       "target": [
         {
           "target": "nsis",

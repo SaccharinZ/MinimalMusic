@@ -7,6 +7,9 @@ const createWindow = () => {
     const win = new BrowserWindow({
         width: 800,
         height: 600,
+        minWidth: 800,
+        minHeight: 600,
+        icon: path.join(__dirname, 'icon.png'),
         autoHideMenuBar: true,
         webPreferences: {
             preload: path.join(__dirname, './preload.js')
